@@ -117,15 +117,27 @@ $("#scrape").on("click", function() {
   window.location.replace("/scrape");
 });
 
-$(".btn-danger").on("click", function() {
-  console.log("I've been clicked");
+// When you click the deletenote button
+$(document).on("click", "#deletenote", function() {
+  // Grab the id associated with the article from the submit button
   var thisId = $(this).attr("data-id");
+
+  // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
     url: "/articles/" + thisId,
     data: {
-      title: $("#titleinput").empty(),
-      body: $("#bodyinput").empty()
+      // Value taken from title input
+      title: "",
+      // Value taken from note textarea
+      body: ""
     }
-  });
+  })
+    // With that done
+    .then(function(data) {
+      // Log the response
+      console.log(data);
+      // Empty the notes section
+      $("#notes").empty();
+    });
 });
