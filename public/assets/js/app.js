@@ -8,9 +8,6 @@ $.getJSON("/articles", function(data) {
         data[i].image +
         ">" +
         "<br />" +
-        "<p data-id='" +
-        data[i]._id +
-        "'>" +
         "<a href=" +
         "https://www.nytimes.com" +
         data[i].link +
@@ -20,8 +17,9 @@ $.getJSON("/articles", function(data) {
         "<br />" +
         "</h2>" +
         "</a>" +
-        "</p>" +
-        "<p>" +
+        "<p data-id=" +
+        data[i]._id +
+        ">" +
         data[i].summary +
         "<br />" +
         "<br />" +
