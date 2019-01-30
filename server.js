@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 
 var axios = require("axios");
 var cheerio = require("cheerio");
-
+var exphbs = require("express-handlebars");
 var db = require("./models");
 
 // Port
@@ -80,8 +80,8 @@ app.get("/scrape", function(req, res) {
         });
     });
 
-    // Send a message to the client
-    res.send("Article Scrape Complete");
+    // Redirect to homepage
+    res.redirect("index.html");
   });
 });
 

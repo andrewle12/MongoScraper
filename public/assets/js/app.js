@@ -23,6 +23,10 @@ $.getJSON("/articles", function(data) {
         data[i].summary +
         "<br />" +
         "<br />" +
+        "<button class='btn btn-success'>" +
+        "Add/Update Note" +
+        "</button>" +
+        "<br />" +
         "<br />" +
         "<br />" +
         "</p>"
@@ -57,7 +61,17 @@ $(document).on("click", "p", function() {
       );
       // A button to submit a new note, with the id of the article saved to it
       $("#notes").append(
-        "<button data-id='" + data._id + "' id='savenote'>Save Note</button>"
+        "<br>" +
+          "<button data-id='" +
+          data._id +
+          "' id='savenote' class='btn btn-primary'>Save Note</button>" +
+          " " +
+          " "
+      );
+      $("#notes").append(
+        "<button data-id='" +
+          data._id +
+          "' id='deletenote' class='btn btn-danger'>Delete Note</button>"
       );
 
       // If there's a note in the article
@@ -97,4 +111,21 @@ $(document).on("click", "#savenote", function() {
   // Also, remove the values entered in the input and textarea for note entry
   $("#titleinput").val("");
   $("#bodyinput").val("");
+});
+
+$("#scrape").on("click", function() {
+  window.location.replace("/scrape");
+});
+
+$(".btn-danger").on("click", function() {
+  console.log("I've been clicked");
+  var thisId = $(this).attr("data-id");
+  $.ajax({
+    method: "POST",
+    url: "/articles/" + thisId,
+    data: {
+      title: $("#titleinput").empty(),
+      body: $("#bodyinput").empty()
+    }
+  });
 });
