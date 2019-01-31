@@ -4,7 +4,8 @@
   "description": "A Mongo Scraper of the New York Times",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Andrew Le",
   "license": "ISC",
