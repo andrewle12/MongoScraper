@@ -10,7 +10,7 @@ var exphbs = require("express-handlebars");
 var db = require("./models");
 
 // Port
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Express
 var app = express();
@@ -24,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB
 // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
@@ -81,8 +84,12 @@ app.get("/scrape", function(req, res) {
     });
 
     // Redirect to homepage
-    res.redirect("index.html");
+    res.redirect("/");
   });
+});
+
+app.get("/", function(req, res) {
+  res.render("index");
 });
 
 // Route for getting all Articles from the db
